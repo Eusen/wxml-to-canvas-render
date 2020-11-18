@@ -1,0 +1,26 @@
+{
+  "name": "wxml-to-canvas-render",
+  "version": "1.0.0",
+  "description": "-",
+  "main": "-",
+  "scripts": {
+    "test": "-"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eusen/wxml-to-canvas-render.git"
+  },
+  "keywords": [
+    "-"
+  ],
+  "author": "Eusen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Eusen/wxml-to-canvas-render/issues"
+  },
+  "homepage": "https://github.com/Eusen/wxml-to-canvas-render#readme",
+  "dependencies": {
+    "widget-ui": "^1.0.2",
+    "wxml-to-canvas": "^1.1.1"
+  }
+}
