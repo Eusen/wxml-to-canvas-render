@@ -317,7 +317,7 @@ export interface WTCMetadata {
 
 ## 特别鸣谢
 
-- [@jiangyh](https://github.com/jiangyh) 感谢她第一时间试用并给予支持
+- [@jiangyh](https://github.com/jiangyh) 感谢 [隔壁小甜] 第一时间试用并给予支持
 
 ## issues
 
