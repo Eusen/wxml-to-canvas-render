@@ -1,6 +1,5 @@
 const {el, WTCUtils, covertElToMetadata} = require('../../components/wxml-to-canvas/wtc');
 
-
 Page({
   data: {
     src: '',
@@ -73,7 +72,7 @@ Page({
         })(),
         (() => {
           const title = '短歌行';
-          const textWidth = this.utils.getFontWidth(title, 16);
+          const textWidth = this.utils.getFontWidth(title, 18);
           return el("text", {
             class: 'title',
             text: title,
@@ -82,7 +81,7 @@ Page({
               left: size.width / 2 - textWidth / 2,
               width: textWidth + 16,
               color: '#fff',
-              fontSize: 16,
+              fontSize: 18,
               textAlign: "center",
               verticalAlign: "middle",
               backgroundColor: 'rgba(0,0,0,0.6)',
@@ -126,6 +125,18 @@ Page({
             });
           })
         })(),
+        (() => {
+          const tip = '下面还有内容哦';
+          return el('text', {
+            class: 'tip',
+            text: tip,
+            style: {
+              position: 'absolute',
+              bottom: 16,
+              right: 16,
+            }
+          })
+        })(),
       ]
     });
 
@@ -139,6 +150,25 @@ Page({
     const p1 = this.widget.renderToCanvas(metadata);
     p1.then((res) => {
       console.log('container', res);
+    });
+  },
+  extraImage() {
+    wx.showLoading({title: '图片生成中'}).then(() => {
+      const p2 = this.widget.canvasToTempFilePath();
+      
+      p2.then(res => {
+        this.setData({
+          src: res.tempFilePath,
+        });
+
+        wx.hideLoading();
+      });
+    });
+  },
+  viewImage() {
+    wx.previewImage({
+      index: 0,
+      urls: [this.data.src],
     });
   }
 })

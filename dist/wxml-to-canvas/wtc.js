@@ -66,11 +66,13 @@ exports.covertElToMetadata = covertElToMetadata;
  * @param fontSize
  */
 function getFontWidth(str, fontSize) {
-    var strLength = str.length;
-    var zh = str.match(/\p{Unified_Ideograph}/ug);
-    var zhLength = zh ? zh.length : 0;
-    var enLength = strLength - zhLength;
-    return enLength * fontSize / 2 + zhLength * fontSize;
+    if (fontSize === void 0) { fontSize = 14; }
+    return str.split('').reduce(function (width, char) {
+        if (char.charCodeAt(0) < 128) {
+            return width + fontSize / 2;
+        }
+        return width + fontSize;
+    }, 0);
 }
 exports.getFontWidth = getFontWidth;
 var WTCUtils = /** @class */ (function () {

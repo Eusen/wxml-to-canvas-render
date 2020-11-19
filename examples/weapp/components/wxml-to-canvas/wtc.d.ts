@@ -21,7 +21,7 @@ export declare function covertElToMetadata(element: WTCElement, deep?: number): 
  * @param str
  * @param fontSize
  */
-export declare function getFontWidth(str: string, fontSize: number): number;
+export declare function getFontWidth(str: string, fontSize?: number): number;
 export declare class WTCUtils {
     private containerWidth;
     private containerHeight;

@@ -77,12 +77,13 @@ export function covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
  * @param str
  * @param fontSize
  */
-export function getFontWidth(str: string, fontSize: number) {
-  const strLength = str.length;
-  const zh = str.match(/\p{Unified_Ideograph}/ug);
-  const zhLength = zh ? zh.length : 0;
-  const enLength = strLength - zhLength;
-  return enLength * fontSize / 2 + zhLength * fontSize;
+export function getFontWidth(str: string, fontSize = 14) {
+  return str.split('').reduce((width, char) => {
+    if (char.charCodeAt(0) < 128) {
+      return width + fontSize / 2;
+    }
+    return width + fontSize;
+  }, 0);
 }
 
 export class WTCUtils {
