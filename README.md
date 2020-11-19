@@ -18,6 +18,14 @@
 
 将 `/dist/wxml-to-canvas` 复制到小程序项目的 `components/` 中
 
+``` json
+{
+  "usingComponents": {
+    "wxml-to-canvas": "../../components/wxml-to-canvas" // 页面中使用相对路径引入
+  }
+}
+```
+
 ### 第二步：导入函数和工具类
 
 ``` js
