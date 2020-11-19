@@ -50,7 +50,6 @@ onLoad() {
 ```
 
 ### 第四步：构建
-
 ``` js
 build() {
   // 通过小程序API获取组件实例
@@ -185,6 +184,7 @@ build() {
   ...
 }
 ```
+去看看 [原插件样式定义](https://github.com/wechat-miniprogram/wxml-to-canvas#%E6%A0%B7%E5%BC%8F)
 
 ### 第五步：DOM转化
 
