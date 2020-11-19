@@ -2,13 +2,7 @@
 
 [![](https://img.shields.io/npm/l/wxml-to-canvas)](https://github.com/wechat-miniprogram/wxml-to-canvas)
 
-本仓库为 [wxml-to-canvas](https://github.com/wechat-miniprogram/wxml-to-canvas) 外部（非侵入，不改变原版API）扩展渲染库，可以更高效、快速地生成插件需要的数据。
-
-譬如，当海报中有需要循环的数据时，通过原版需要复杂的字符串拼接；而通过本扩展，可以非常方便地做到循环渲染（有点类似与React）。
-
-- `/dist/wxml-to-canvas` 为合成版组件，可以独立使用。
-
-- `/examples` 存放了一些使用示例（目前只完善了原生小程序）
+本仓库为 [wxml-to-canvas](https://github.com/wechat-miniprogram/wxml-to-canvas) 外部（非侵入，不改变原版API）扩展渲染库，可以更高效、快速地生成插件需要的数据。当海报中有需要循环的数据时，原版需要复杂的字符串拼接。而通过这个扩展，可以非常方便地做到循环渲染（有点类似与React）。
 
 目前扩展的内容比较简单，大致包含三个部分：
 
@@ -312,14 +306,19 @@ export interface WTCMetadata {
 
 我在原有style的基础上增加了一个新的属性 `textLine`，顾名思义，这个属性用于多行文本，比如 textLine 传入 2 时，文本元素的高度 = 文字高度 * 2。
 
-# 作者
+
+## 目录说明
+- `/dist/wxml-to-canvas` 为合成版组件，可以独立使用。
+- `/examples` 存放了一些使用示例（目前只完善了原生小程序）
+
+## 作者
 
 [@Eusen](https://github.com/Eusen)
 
-# 鸣谢
+## 特别鸣谢
 
 - [@jiangyh](https://github.com/jiangyh) 感谢她第一时间试用并给予支持
 
-# issues
+## issues
 
 [提个建议？](https://github.com/Eusen/wxml-to-canvas-render/issues/new)
