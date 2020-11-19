@@ -1,3 +1,5 @@
+declare const wx;
+
 export interface WTCElement {
   tagName?: string;
   class: string;
@@ -22,6 +24,7 @@ export function el(tagName: 'view' | 'image' | 'text', attr: WTCElement): WTCEle
 }
 
 export function covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
+  // @ts-ignore
   const tabs = new Array(deep).fill('  ').join('');
   const childWXML: string[] = [];
 
@@ -54,6 +57,7 @@ export function covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
       if (!e) return;
       const child = covertElToMetadata(e, deep + 1);
       childWXML.push(child.wxml);
+      // @ts-ignore
       style = Object.assign(style, child.style);
     });
   }
@@ -68,26 +72,73 @@ export function covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
   }
 }
 
-export function widthFix(originalWidth: number, originalHeight: number, scale = 100, containerWidth = wx.getSystemInfoSync().screenWidth) {
-  return {
-    width: containerWidth * (scale / 100),
-    height: containerWidth / originalWidth * originalHeight * (scale / 100),
-  }
-}
-
-export function heightFix(originalWidth: number, originalHeight: number, scale = 100, containerHeight = wx.getSystemInfoSync().screenHeight) {
-  return {
-    width: containerHeight / originalHeight * originalWidth * (scale / 100),
-    height: containerHeight * (scale / 100),
-  }
-}
-
+/**
+ * 粗略计算，不精确
+ * @param str
+ * @param fontSize
+ */
 export function getFontWidth(str: string, fontSize: number) {
   const strLength = str.length;
   const zh = str.match(/\p{Unified_Ideograph}/ug);
   const zhLength = zh ? zh.length : 0;
   const enLength = strLength - zhLength;
   return enLength * fontSize / 2 + zhLength * fontSize;
+}
+
+export class WTCUtils {
+  widget = null;
+
+  static create(containerWidth = wx.getSystemInfoSync().screenWidth, containerHeight = wx.getSystemInfoSync().screenHeight) {
+    return new WTCUtils(containerWidth, containerHeight);
+  }
+
+  constructor(private containerWidth: number, private containerHeight: number) {
+  }
+
+  setWidget(widget: any) {
+    this.widget = widget;
+  }
+
+  getSize() {
+    return {
+      width: this.containerWidth,
+      height: this.containerHeight,
+    };
+  }
+
+  widthFix(originalWidth: number, originalHeight: number, scale = 1) {
+    return {
+      width: this.containerWidth * scale,
+      height: this.containerWidth / originalWidth * originalHeight * scale,
+    }
+  }
+
+  heightFix(originalWidth: number, originalHeight: number, scale = 1) {
+    return {
+      width: this.containerHeight / originalHeight * originalWidth * scale,
+      height: this.containerHeight * scale,
+    }
+  }
+
+  getScaleWidth(scale: number) {
+    return this.containerWidth * scale;
+  }
+
+  getScaleHeight(scale: number) {
+    return this.containerHeight * scale;
+  }
+
+  /**
+   * 精确计算
+   */
+  getFontWidth(text: string, fontSize = 14) {
+    const {ctx} = this.widget;
+    const originalFont = ctx.font;
+    ctx.font = `${fontSize}px sans-serif`;
+    const width = ctx.measureText(text).width;
+    ctx.font = originalFont;
+    return width;
+  }
 }
 
 interface WTCCSSStyleDeclaration {
@@ -120,4 +171,3 @@ interface WTCCSSStyleDeclaration {
 
   textLine?: number;
 }
-
