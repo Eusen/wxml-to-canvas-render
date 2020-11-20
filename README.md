@@ -33,7 +33,6 @@
 const {
   el, 
   WTCUtils, 
-  covertElToMetadata
 } = require('../../components/wxml-to-canvas/wtc'); // 注意：扩展库位于 wxml-to-canvas/wtc.js 内
 ```
 
