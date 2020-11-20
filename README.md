@@ -181,7 +181,7 @@ extraImage() {
 <div style="text-align: center">
   <img src="./assets/1.png">
   <div>多行文字和图片</div>
-  <img src="./assets/2.jpg">
+  <img src="./assets/2.jpg" width="80%">
   <div>名画里的秘密</div>
   <img src="./assets/3.png">
   <div>海报</div>
