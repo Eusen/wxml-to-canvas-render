@@ -89,7 +89,7 @@ Page({
   },
   extraImage() {
     wx.showLoading({title: '图片生成中'}).then(() => {
-      const p2 = this.widget.canvasToTempFilePath();
+      const p2 = this.widget.canvasToTempFilePath({quality: 0.6, fileType: 'jpg'});
       
       p2.then(res => {
         this.setData({
