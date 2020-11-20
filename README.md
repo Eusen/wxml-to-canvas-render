@@ -292,6 +292,13 @@ export interface WTCMetadata {
 - `/dist/wxml-to-canvas` 为合成版组件，可以独立使用。
 - `/examples` 存放了一些使用示例（目前只完善了原生小程序）
 
+## 开发计划
+- [x] 1.0.0 版本发布
+- [x] 完善微信原生小程序示例
+- [ ] 完善Taro示例
+- [ ] 完善UniApp示例
+- [ ] 优化渲染逻辑，使图片可以自动设置原始宽高
+
 ## 作者
 
 [@Eusen](https://github.com/Eusen)
