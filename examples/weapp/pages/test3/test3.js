@@ -1,4 +1,4 @@
-const {el, WTCUtils, covertElToMetadata} = require('../../components/wxml-to-canvas/wtc');
+const {el, WTCUtils} = require('../../components/wxml-to-canvas/wtc');
 
 Page({
   data: {
@@ -96,7 +96,7 @@ Page({
               style: {
                 left: size.width * 0.2,
                 bottom: size.height * 0.38,
-                // color: '#fff',
+                color: '#666',
                 fontSize: 40,
               }
             },
@@ -113,7 +113,7 @@ Page({
               style: {
                 left: size.width * 0.23,
                 bottom: size.height * 0.18,
-                fontSize: 46,
+                fontSize: 44,
               }
             },
             {
@@ -149,7 +149,7 @@ Page({
                 position: 'absolute',
                 color: '#222',
                 ...t.style,
-                bottom: t.style.bottom - size.height * 0.09,
+                bottom: t.style.bottom - size.height * 0.05,
               }
             });
           });
@@ -164,7 +164,7 @@ Page({
               style: {
                 position: 'absolute',
                 left: size.width * 0.37,
-                top: size.height * 0.7 + 19 * index,
+                top: size.height * 0.66 + 19 * index,
                 color: '#222',
                 fontSize: 16,
               }
@@ -177,39 +177,43 @@ Page({
             {
               text: '12',
               style: {
-                right: size.width * 0.2,
-                bottom: size.height * 0.3,
+                right: size.width * 0.15,
+                bottom: size.height * 0.23,
                 fontSize: 30,
+                textAlign: 'right',
               }
             },
             {
               text: '月',
               style: {
                 right: size.width * 0.1,
-                bottom: size.height * 0.3,
+                bottom: size.height * 0.24,
                 fontSize: 20,
+                textAlign: 'right',
               }
             },
             {
               text: '4',
               style: {
-                right: size.width * 0.2,
-                bottom: size.height * 0.3,
+                right: size.width * 0.15,
+                bottom: size.height * 0.17,
                 fontSize: 30,
+                textAlign: 'right',
               }
             },
             {
               text: '日',
               style: {
-                right: size.width * 0.2,
-                bottom: size.height * 0.3,
+                right: size.width * 0.1,
+                bottom: size.height * 0.18,
                 fontSize: 20,
+                textAlign: 'right',
               }
             },
           ];
           return texts.map((t, index) => {
             return el('text', {
-              class: `time${index}`,
+              class: `date${index}`,
               text: t.text,
               style: {
                 position: 'absolute',
@@ -222,21 +226,47 @@ Page({
         // Friday. 20:07
         (() => {
           const text = 'Friday. 20:07';
+          return el('text', {
+            class: 'time',
+            text,
+            style: {
+              position: 'absolute',
+              color: '#222',
+              width: this.utils.getFontWidth(text) + 8,
+              right: size.width * 0.1,
+              bottom: size.height * 0.14,
+              backgroundColor: '#ddd',
+              textAlign: 'center',
+            }
+          });
         })(),
         // 联系方式
         ...(() => {
           const texts = [
-            '如有疑问请联系客服人员，联系方式如下：',
-            'https://github.com/Eusen/wxml-to-canvas-render/issues/new',
+            '如有疑问请联系客服人员，联系方式如下',
+            'https://github.com/Eusen',
             '179530591@qq.com',
           ];
-          return [];
+          return texts.map((text, index) => {
+            return el('text', {
+              class: `tip${index}`,
+              text,
+              style: {
+                position: 'absolute',
+                color: '#222',
+                right: size.width * 0.1,
+                top: size.height * 0.87 + 14 * index,
+                textAlign: 'right',
+                fontSize: 10,
+              },
+            })
+          });
         })(),
       ]
     });
 
     // 将DOM树转化成插件可读的数据
-    const metadata = covertElToMetadata(dom);
+    const metadata = this.utils.covertElToMetadata(dom);
 
     console.log(metadata.wxml);
     console.log(metadata.style);

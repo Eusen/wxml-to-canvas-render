@@ -23,72 +23,6 @@ export function el(tagName: 'view' | 'image' | 'text', attr: WTCElement): WTCEle
   };
 }
 
-export function covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
-  // @ts-ignore
-  const tabs = new Array(deep).fill('  ').join('');
-  const childWXML: string[] = [];
-
-  if (!element.style) element.style = {};
-
-  if (!element.style.lineHeight) {
-    element.style.lineHeight = 1.5;
-  }
-
-  if (!element.style.fontSize) {
-    element.style.fontSize = 14;
-  }
-
-  if (element.tagName === 'text' && !element.style.width) {
-    element.style.width = getFontWidth(element.text!, element.style.fontSize);
-  }
-
-  if (element.style.textLine) {
-    element.style.height = element.style.lineHeight * element.style.textLine * element.style.fontSize;
-  } else {
-    element.style.height = element.style.height || (element.style.lineHeight * element.style.fontSize);
-  }
-
-  element.style.lineHeight = (element.style.lineHeight + '') as any;
-
-  let style = {[element.class!]: element.style};
-
-  if (element.children) {
-    element.children.forEach(e => {
-      if (!e) return;
-      const child = covertElToMetadata(e, deep + 1);
-      childWXML.push(child.wxml);
-      // @ts-ignore
-      style = Object.assign(style, child.style);
-    });
-  }
-
-  const hasChild = childWXML.length > 0;
-
-  return {
-    wxml: `${tabs}<${element.tagName}${element.class ? ` class="${element.class}"` : ''}${element.src ? ` src="${element.src}"` : ''}>${hasChild ? '\n' : ''}${element.text ? `${element.text}${childWXML.length > 0 ? '\n' : ''}` : ''}${childWXML.join('\n')}${hasChild ? `\n${tabs}` : ''}</${element.tagName}>`,
-    style,
-    width: element.style ? element.style.width! : 0,
-    height: element.style ? element.style.height! : 0,
-  }
-}
-
-/**
- * 粗略计算，不精确
- * @param str
- * @param fontSize
- */
-export function getFontWidth(str: string, fontSize = 14) {
-  return str.split('').reduce((width, char) => {
-    if (char.match(/0-9|A-Z|a-z/)) {
-      return width + fontSize * 0.65;
-    }
-    if (char.charCodeAt(0) < 128) {
-      return width + fontSize * 0.5;
-    }
-    return width + fontSize;
-  }, 0);
-}
-
 export class WTCUtils {
   widget = null;
 
@@ -142,6 +76,55 @@ export class WTCUtils {
     const width = ctx.measureText(text).width;
     ctx.font = originalFont;
     return width;
+  }
+
+  covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
+    // @ts-ignore
+    const tabs = new Array(deep).fill('  ').join('');
+    const childWXML: string[] = [];
+
+    if (!element.style) element.style = {};
+
+    if (!element.style.lineHeight) {
+      element.style.lineHeight = 1.5;
+    }
+
+    if (!element.style.fontSize) {
+      element.style.fontSize = 14;
+    }
+
+    if (element.tagName === 'text' && !element.style.width) {
+      element.style.width = this.getFontWidth(element.text!, element.style.fontSize);
+    }
+
+    if (element.style.textLine) {
+      element.style.height = element.style.lineHeight * element.style.textLine * element.style.fontSize;
+    } else {
+      element.style.height = element.style.height || (element.style.lineHeight * element.style.fontSize);
+    }
+
+    element.style.lineHeight = (element.style.lineHeight + '') as any;
+
+    let style = {[element.class!]: element.style};
+
+    if (element.children) {
+      element.children.forEach(e => {
+        if (!e) return;
+        const child = this.covertElToMetadata(e, deep + 1);
+        childWXML.push(child.wxml);
+        // @ts-ignore
+        style = Object.assign(style, child.style);
+      });
+    }
+
+    const hasChild = childWXML.length > 0;
+
+    return {
+      wxml: `${tabs}<${element.tagName}${element.class ? ` class="${element.class}"` : ''}${element.src ? ` src="${element.src}"` : ''}>${hasChild ? '\n' : ''}${element.text ? `${element.text}${childWXML.length > 0 ? '\n' : ''}` : ''}${childWXML.join('\n')}${hasChild ? `\n${tabs}` : ''}</${element.tagName}>`,
+      style,
+      width: element.style ? element.style.width! : 0,
+      height: element.style ? element.style.height! : 0,
+    }
   }
 }
 

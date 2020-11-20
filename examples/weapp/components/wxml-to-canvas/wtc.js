@@ -11,70 +11,11 @@ var __assign = (this && this.__assign) || function () {
     return __assign.apply(this, arguments);
 };
 exports.__esModule = true;
-exports.WTCUtils = exports.getFontWidth = exports.covertElToMetadata = exports.el = void 0;
+exports.WTCUtils = exports.el = void 0;
 function el(tagName, attr) {
     return __assign(__assign({}, attr), { tagName: tagName });
 }
 exports.el = el;
-function covertElToMetadata(element, deep) {
-    var _a;
-    if (deep === void 0) { deep = 0; }
-    // @ts-ignore
-    var tabs = new Array(deep).fill('  ').join('');
-    var childWXML = [];
-    if (!element.style)
-        element.style = {};
-    if (!element.style.lineHeight) {
-        element.style.lineHeight = 1.5;
-    }
-    if (!element.style.fontSize) {
-        element.style.fontSize = 14;
-    }
-    if (element.tagName === 'text' && !element.style.width) {
-        element.style.width = getFontWidth(element.text, element.style.fontSize);
-    }
-    if (element.style.textLine) {
-        element.style.height = element.style.lineHeight * element.style.textLine * element.style.fontSize;
-    }
-    else {
-        element.style.height = element.style.height || (element.style.lineHeight * element.style.fontSize);
-    }
-    element.style.lineHeight = (element.style.lineHeight + '');
-    var style = (_a = {}, _a[element["class"]] = element.style, _a);
-    if (element.children) {
-        element.children.forEach(function (e) {
-            if (!e)
-                return;
-            var child = covertElToMetadata(e, deep + 1);
-            childWXML.push(child.wxml);
-            // @ts-ignore
-            style = Object.assign(style, child.style);
-        });
-    }
-    var hasChild = childWXML.length > 0;
-    return {
-        wxml: tabs + "<" + element.tagName + (element["class"] ? " class=\"" + element["class"] + "\"" : '') + (element.src ? " src=\"" + element.src + "\"" : '') + ">" + (hasChild ? '\n' : '') + (element.text ? "" + element.text + (childWXML.length > 0 ? '\n' : '') : '') + childWXML.join('\n') + (hasChild ? "\n" + tabs : '') + "</" + element.tagName + ">",
-        style: style,
-        width: element.style ? element.style.width : 0,
-        height: element.style ? element.style.height : 0
-    };
-}
-exports.covertElToMetadata = covertElToMetadata;
-/**
- * 粗略计算，不精确
- * @param str
- * @param fontSize
- */
-function getFontWidth(str, fontSize) {
-    if (fontSize === void 0) { fontSize = 14; }
-    return str.split('').reduce(function (width, char) {
-        if (char.charCodeAt(0) < 128) {
-            return width + fontSize * 0.59;
-        }
-        return width + fontSize;
-    }, 0);
-}
-exports.getFontWidth = getFontWidth;
 var WTCUtils = /** @class */ (function () {
     function WTCUtils(containerWidth, containerHeight) {
         this.containerWidth = containerWidth;
@@ -126,6 +67,50 @@ var WTCUtils = /** @class */ (function () {
         var width = ctx.measureText(text).width;
         ctx.font = originalFont;
         return width;
+    };
+    WTCUtils.prototype.covertElToMetadata = function (element, deep) {
+        var _a;
+        var _this = this;
+        if (deep === void 0) { deep = 0; }
+        // @ts-ignore
+        var tabs = new Array(deep).fill('  ').join('');
+        var childWXML = [];
+        if (!element.style)
+            element.style = {};
+        if (!element.style.lineHeight) {
+            element.style.lineHeight = 1.5;
+        }
+        if (!element.style.fontSize) {
+            element.style.fontSize = 14;
+        }
+        if (element.tagName === 'text' && !element.style.width) {
+            element.style.width = this.getFontWidth(element.text, element.style.fontSize);
+        }
+        if (element.style.textLine) {
+            element.style.height = element.style.lineHeight * element.style.textLine * element.style.fontSize;
+        }
+        else {
+            element.style.height = element.style.height || (element.style.lineHeight * element.style.fontSize);
+        }
+        element.style.lineHeight = (element.style.lineHeight + '');
+        var style = (_a = {}, _a[element["class"]] = element.style, _a);
+        if (element.children) {
+            element.children.forEach(function (e) {
+                if (!e)
+                    return;
+                var child = _this.covertElToMetadata(e, deep + 1);
+                childWXML.push(child.wxml);
+                // @ts-ignore
+                style = Object.assign(style, child.style);
+            });
+        }
+        var hasChild = childWXML.length > 0;
+        return {
+            wxml: tabs + "<" + element.tagName + (element["class"] ? " class=\"" + element["class"] + "\"" : '') + (element.src ? " src=\"" + element.src + "\"" : '') + ">" + (hasChild ? '\n' : '') + (element.text ? "" + element.text + (childWXML.length > 0 ? '\n' : '') : '') + childWXML.join('\n') + (hasChild ? "\n" + tabs : '') + "</" + element.tagName + ">",
+            style: style,
+            width: element.style ? element.style.width : 0,
+            height: element.style ? element.style.height : 0
+        };
     };
     return WTCUtils;
 }());

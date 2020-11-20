@@ -38,7 +38,7 @@ Page({
           const src = 'https://cloud-minapp-37929.cloud.ifanrusercontent.com/1kflAf6K5B5D5ucV.jpg';
           const backSize = this.utils.widthFix(1152, 1152, 0.26);
           return el('image', {
-            class: 'back',
+            class: 'backImage',
             src,
             style: {
               position: 'absolute',
@@ -51,7 +51,7 @@ Page({
         (() => {
           const src = 'https://cloud-minapp-37929.cloud.ifanrusercontent.com/1kflb1WtHktkL6L0.png';
           return el('image', {
-            class: 'cover',
+            class: 'coverImage',
             src,
             style: {
               ...size,
@@ -59,13 +59,13 @@ Page({
           })
         })(),
         (() => {
-          const text = '嘿嘿~';
+          const text = '窝窝头，一块钱四个~';
           return el('text', {
             class: 'heihei',
             text,
             style: {
               position: 'absolute',
-              left: this.utils.getScaleWidth(130 / size.width),
+              left: this.utils.getScaleWidth(20 / size.width),
               top: this.utils.getScaleHeight(450 / size.height),
               color: '#fff',
               fontSize: 26,
@@ -76,7 +76,7 @@ Page({
     });
 
     // 将DOM树转化成插件可读的数据
-    const metadata = covertElToMetadata(dom);
+    const metadata = this.utils.covertElToMetadata(dom);
 
     console.log(metadata.wxml);
     console.log(metadata.style);

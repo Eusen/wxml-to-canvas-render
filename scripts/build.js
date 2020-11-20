@@ -33,6 +33,12 @@ function log(...messages) {
   fs.writeFileSync(widgetPath, widgetContent.replace(`require('widget-ui')`, `require('./widget-ui.js')`));
 
 
+  log('正在修改 index.js...');
+  const indexPath = path.join(wxmlToCanvasPathDist, 'index.js');
+  const indexContent = fs.readFileSync(indexPath).toString();
+  fs.writeFileSync(indexPath, indexContent.replace(/this\.dpr,/g, `(args.scale || 1),`));
+
+
   log('正在编译扩展库...');
   const tsPath = path.join(__dirname, '../src/wxml-to-canvas.ts');
   const tsdPath = path.join(__dirname, '../src/wxml-to-canvas.d.ts');

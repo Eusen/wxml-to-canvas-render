@@ -15,13 +15,6 @@ export interface WTCMetadata {
     height: number;
 }
 export declare function el(tagName: 'view' | 'image' | 'text', attr: WTCElement): WTCElement;
-export declare function covertElToMetadata(element: WTCElement, deep?: number): WTCMetadata;
-/**
- * 粗略计算，不精确
- * @param str
- * @param fontSize
- */
-export declare function getFontWidth(str: string, fontSize?: number): number;
 export declare class WTCUtils {
     private containerWidth;
     private containerHeight;
@@ -47,6 +40,7 @@ export declare class WTCUtils {
      * 精确计算
      */
     getFontWidth(text: string, fontSize?: number): any;
+    covertElToMetadata(element: WTCElement, deep?: number): WTCMetadata;
 }
 interface WTCCSSStyleDeclaration {
     width?: number;

@@ -141,7 +141,7 @@ Page({
     });
 
     // 将DOM树转化成插件可读的数据
-    const metadata = covertElToMetadata(dom);
+    const metadata = this.utils.covertElToMetadata(dom);
 
     console.log(metadata.wxml);
     console.log(metadata.style);
