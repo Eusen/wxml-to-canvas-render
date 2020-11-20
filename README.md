@@ -191,7 +191,7 @@ extraImage() {
 
 ## API
 
-## <b>el(tagName: 'view' | 'image' | 'text', attr: WTCElement): `WTCElement`</b>
+## <b>`el`(tagName: 'view' | 'image' | 'text', attr: WTCElement): `WTCElement`</b>
 #### 说明：创建 DOM Element
 
 - tagName 目前官方仅支持 'view' | 'image' | 'text'
@@ -212,7 +212,18 @@ export interface WTCElement {
 
 - 需要注意的是，原版说每个元素必传 `width` 和 `height`，现在 `text` 已经不需要了，我会默认计算文字的宽高。
 
-## <b>covertElToMetadata(element: WTCElement, deep = 0): `WTCMetadata`</b>
+## <b>`WTCUtils.create`(containerWidth: number, containerHeight: number): WTCUtils</b>
+#### 说明：创建工具类
+
+- containerWidth 默认为屏幕宽度
+- containerHeight 默认为屏幕高度
+
+## <b>WTCUtils#setWidget(widget: any)</b>
+#### 说明：设置官方插件实例 
+
+- widget 官方插件实例
+
+## <b>WTCUtils#`covertElToMetadata`(element: WTCElement, deep = 0): `WTCMetadata`</b>
 #### 说明：将 DOM Element 转化为插件需要的数据
 
 - WTCElement 构建完的Element对象
@@ -227,24 +238,13 @@ export interface WTCMetadata {
 }
 ```
 
-## <b>WTCUtils.create(containerWidth: number, containerHeight: number): WTCUtils</b>
-#### 说明：创建工具类
-
-- containerWidth 默认为屏幕宽度
-- containerHeight 默认为屏幕高度
-
-## <b>WTCUtils#setWidget(widget: any)</b>
-#### 说明：设置官方插件实例 
-
-- widget 官方插件实例
-
-## <b>WTCUtils#getSize(): {`width`: number; `height`: number;}</b>
+## <b>WTCUtils#`getSize`(): {`width`: number; `height`: number;}</b>
 #### 说明：获取容器宽高
 
 - `width` 容器宽度
 - `height` 容器高度
 
-## <b>WTCUtils#widthFix(originalWidth: number, originalHeight: number, scale = 1): {`width`: number; `height`: number;}</b>
+## <b>WTCUtils#`widthFix`(originalWidth: number, originalHeight: number, scale = 1): {`width`: number; `height`: number;}</b>
 #### 说明：以容器宽度为基准，计算等比缩放的宽高
 
 - originalWidth 原始宽度
@@ -253,7 +253,7 @@ export interface WTCMetadata {
 - `width` (与容器等宽) * 缩放比例
 - `height` (与容器等宽的同时，按原始宽高比，等比缩放的高度) * 缩放比例
 
-## <b>WTCUtils#heightFix(originalWidth: number, originalHeight: number, scale = 1): {`width`: number; `height`: number;}</b>
+## <b>WTCUtils#`heightFix`(originalWidth: number, originalHeight: number, scale = 1): {`width`: number; `height`: number;}</b>
 #### 说明：以容器高度为基准，计算等比缩放的宽高
 
 - originalWidth 原始宽度
@@ -262,28 +262,28 @@ export interface WTCMetadata {
 - `width` (与容器等高的同时，按原始宽高比，等比缩放的宽度) * 缩放比例
 - `height` (与容器等高) * 缩放比例
 
-## <b>WTCUtils#getScaleWidth(scale: number): number</b>
+## <b>WTCUtils#`getScaleWidth`(scale: number): number</b>
 #### 说明：获取缩放后的宽度
 
 - scale 缩放比例
 
-## <b>WTCUtils#getScaleHeight(scale: number): number</b>
+## <b>WTCUtils#`getScaleHeight`(scale: number): number</b>
 #### 说明：获取缩放后的高度
 
 - scale 缩放比例
 
-## <b>WTCUtils#getFontWidth(text: string, fontSize = 14): number</b>
+## <b>WTCUtils#`getFontWidth`(text: string, fontSize = 14): number</b>
 #### 说明：获取字符串（精确）宽度
 
 - text 字符串
 
 ---
 
-## Style 中的附加属性：textLine
+## Style 中的附加属性：`textLine`
 
 我在原有style的基础上增加了一个新的属性 `textLine`，顾名思义，这个属性用于多行文本，比如 textLine 传入 2 时，文本元素的高度 = 文字高度 * 2。
 
-## widget.canvasToTempFilePath(options) 参数扩展
+## widget.canvasToTempFilePath(`options`) 参数扩展
 - options.`fileType` : 'jpg' | 'png'
 - options.`quality` : (0, 1] // 目前仅对 jpg 有效
 - options.`scale` : 1 // 输出图片的缩放比例，默认为 1
