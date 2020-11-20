@@ -225,7 +225,7 @@ export interface WTCElement {
 #### 说明：将 DOM Element 转化为插件需要的数据
 
 - WTCElement 构建完的Element对象
-- deep 深度，扩展库自用，误传
+- deep 深度，扩展库自用，勿传
 - `WTCMetadata`
 ``` ts
 export interface WTCMetadata {
