@@ -133,8 +133,8 @@ build() {
       (() => {
         // 定义文字
         return el('text', {
-          class: 'heihei',
-          text: '窝窝头，一块钱四个~',
+          class: 'heiHei',
+          text: '窝窝头，一块钱四个~', // text 必传
           style: {
             position: 'absolute',
             left: this.utils.getScaleWidth(20 / size.width),
