@@ -218,7 +218,7 @@ export interface WTCElement {
 - containerWidth 默认为屏幕宽度
 - containerHeight 默认为屏幕高度
 
-## <b>WTCUtils#setWidget(widget: any)</b>
+## <b>WTCUtils#`setWidget`(widget: any)</b>
 #### 说明：设置官方插件实例 
 
 - widget 官方插件实例
