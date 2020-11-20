@@ -21,7 +21,8 @@
 ``` json
 {
   "usingComponents": {
-    "wxml-to-canvas": "../../components/wxml-to-canvas" // 页面中使用相对路径引入
+    /** 页面中使用相对路径引入 */
+    "wxml-to-canvas": "../../components/wxml-to-canvas" 
   }
 }
 ```
