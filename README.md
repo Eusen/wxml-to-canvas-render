@@ -66,10 +66,8 @@ Page({
 
 ``` js
 onLoad() {
-  const info = wx.getSystemInfoSync();
   // 先创建工具类实例，传入画布尺寸
-  // 我这里传入的是屏幕尺寸，你也可以传入设计图的实际尺寸
-  this.utils = WTCUtils.create(info.screenWidth, info.screenHeight);
+  this.utils = WTCUtils.create(750 * 1.2, 889 * 1.2);
 
   // 将尺寸注入到页面中
   this.setData({
