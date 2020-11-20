@@ -219,7 +219,7 @@ export interface WTCElement {
 ## <b>WTCUtils#`setWidget`(widget: any)</b>
 #### 说明：设置官方插件实例 
 
-- widget 官方插件实例
+- widget 官方插件实例，必须传入，否则无法计算字体宽度
 
 ## <b>WTCUtils#`covertElToMetadata`(element: WTCElement, deep = 0): `WTCMetadata`</b>
 #### 说明：将 DOM Element 转化为插件需要的数据
