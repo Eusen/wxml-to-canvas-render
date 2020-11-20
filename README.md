@@ -18,10 +18,10 @@
 
 将 `/dist/wxml-to-canvas` 复制到小程序项目的 `components/` 中
 
-``` json
+``` js
 {
   "usingComponents": {
-    /** 页面中使用相对路径引入 */
+    // 页面中使用相对路径引入
     "wxml-to-canvas": "../../components/wxml-to-canvas" 
   }
 }
