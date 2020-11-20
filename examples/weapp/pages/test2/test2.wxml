@@ -1,0 +1,8 @@
+<view>
+  <wxml-to-canvas wx:if="{{size}}" class="widget" width="{{size.width}}" height="{{size.height}}"></wxml-to-canvas>
+  <button type="primary" style="margin: 1rem auto;" bindtap="extraImage">生成图片</button>
+</view>
+<view wx:if="{{src}}">
+  <image src="{{src}}" mode="widthFix" style="width: 100vw;" bindtap="viewImage"></image>
+  <button type="primary" style="margin: 1rem auto;" bindtap="saveImage">导出图片</button>
+</view>

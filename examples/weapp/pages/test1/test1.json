@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wxml-to-canvas": "../../components/wxml-to-canvas"
+  },
+  "navigationBarTitleText": "多行文字和图片"
+}

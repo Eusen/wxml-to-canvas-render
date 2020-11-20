@@ -20,10 +20,10 @@ function log(...messages) {
   log('正在将新版本复制到dist目录...');
   fsExtra.copySync(wxmlToCanvasPath, wxmlToCanvasPathDist);
 
-  const widgetUIPath = path.join(__dirname, '../node_modules/widget-ui/dist/index.js');
-  const widgetUIPathDist = path.join(__dirname, '../dist/wxml-to-canvas/widget-ui.js');
 
   log('正在将 widget-ui 合并至 `/dist/wxml-to-canvas` ...');
+  const widgetUIPath = path.join(__dirname, '../node_modules/widget-ui/dist/index.js');
+  const widgetUIPathDist = path.join(__dirname, '../dist/wxml-to-canvas/widget-ui.js');
   fsExtra.copySync(widgetUIPath, widgetUIPathDist);
 
 
@@ -39,10 +39,10 @@ function log(...messages) {
   const jsPath = path.join(__dirname, '../src/wxml-to-canvas.js');
   child_process.execSync(`npx tsc ${tsPath} -d`);
 
-  const wtcJsPath = path.join(__dirname, '../dist/wxml-to-canvas/wtc.js');
-  const wtcTsdPath = path.join(__dirname, '../dist/wxml-to-canvas/wtc.d.ts');
 
   log('正在将扩展库合并至 `/dist/wxml-to-canvas` ...');
+  const wtcJsPath = path.join(__dirname, '../dist/wxml-to-canvas/wtc.js');
+  const wtcTsdPath = path.join(__dirname, '../dist/wxml-to-canvas/wtc.d.ts');
   fsExtra.moveSync(jsPath, wtcJsPath);
   fsExtra.moveSync(tsdPath, wtcTsdPath);
 

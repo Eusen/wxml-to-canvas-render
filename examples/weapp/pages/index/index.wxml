@@ -1,5 +1,5 @@
-<wxml-to-canvas wx:if="size" class="widget" width="{{size.width}}" height="{{size.height}}"></wxml-to-canvas>
 <view>
-  <button type="primary" style="margin: 1rem auto;" bindtap="extraImage">生成图片</button>
+  <button type="primary" style="margin: 1rem auto;" bindtap="navToTest1">多行文字和图片</button>
+  <button type="primary" style="margin: 1rem auto;" bindtap="navToTest2">名画里的秘密</button>
+  <button type="primary" style="margin: 1rem auto;" bindtap="navToTest3">海报</button>
 </view>
-<image src="{{src}}" mode="heightFix" style="height: 100vh;" bindtap="viewImage"></image>

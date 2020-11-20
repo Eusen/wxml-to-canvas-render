@@ -69,7 +69,7 @@ function getFontWidth(str, fontSize) {
     if (fontSize === void 0) { fontSize = 14; }
     return str.split('').reduce(function (width, char) {
         if (char.charCodeAt(0) < 128) {
-            return width + fontSize / 2;
+            return width + fontSize * 0.59;
         }
         return width + fontSize;
     }, 0);

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "wxml-to-canvas": "../../components/wxml-to-canvas"
+  },
+  "navigationBarTitleText": "名画里的秘密"
+}

@@ -79,8 +79,11 @@ export function covertElToMetadata(element: WTCElement, deep = 0): WTCMetadata {
  */
 export function getFontWidth(str: string, fontSize = 14) {
   return str.split('').reduce((width, char) => {
+    if (char.match(/0-9|A-Z|a-z/)) {
+      return width + fontSize * 0.65;
+    }
     if (char.charCodeAt(0) < 128) {
-      return width + fontSize / 2;
+      return width + fontSize * 0.5;
     }
     return width + fontSize;
   }, 0);
