@@ -197,7 +197,7 @@ extraImage() {
 
 ``` ts
 export interface WTCElement {
-  tagName?: string;
+  tagName?: string; // 扩展库自用，请忽略
   class: string; // 必传，且保证唯一
   style?: WTCCSSStyleDeclaration; // 遵守原插件样式定义
   children?: (WTCElement | null)[]; // 子元素数组
