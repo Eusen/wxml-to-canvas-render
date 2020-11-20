@@ -178,7 +178,7 @@ extraImage() {
 ```
 
 ## 效果展示
-<div style="text-align: center">
+<div align=center>
   <img src="./assets/1.png">
   <div>多行文字和图片</div>
   <img src="./assets/2.jpg" width="80%">
