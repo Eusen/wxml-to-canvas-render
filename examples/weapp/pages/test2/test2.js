@@ -1,28 +1,22 @@
-const {el, WTCUtils, covertElToMetadata} = require('../../components/wxml-to-canvas/wtc');
+const {el, WTCDocument} = require('../../components/wxml-to-canvas/render');
 
 Page({
   data: {
     src: '',
     size: null,
+    ready: WTCUtils.getReadyCallback('build'),
   },
   onLoad() {
     // 先创建工具，传入尺寸
-    this.utils = WTCUtils.create(750 * 1.2, 889 * 1.2);
+    this.utils = WTCUtils.create(750, 889);
 
     this.setData({
       size: this.utils.getSize(),
-    }, () => {
-      setTimeout(() => {
-        // 等待页面渲染完成，否则找不到 canvas
-        this.build();
-      }, 100);
     });
   },
   build() {
     // 通过API获取组件实例
     this.widget = this.selectComponent('.widget');
-    // 将组件注入到工具类中
-    this.utils.setWidget(this.widget);
     // 获取当前尺寸
     const size = this.utils.getSize();
 
@@ -90,12 +84,13 @@ Page({
   extraImage() {
     wx.showLoading({title: '图片生成中'}).then(() => {
       const p2 = this.widget.canvasToTempFilePath({quality: 0.6, fileType: 'jpg'});
-      
+
       p2.then(res => {
         this.setData({
           src: res.tempFilePath,
         });
-
+        wx.hideLoading();
+      }, err => {
         wx.hideLoading();
       });
     });

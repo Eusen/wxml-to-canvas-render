@@ -38,7 +38,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.14.0",
-  "appid": "touristappid",
+  "appid": "wxcbc24655768f428b",
   "projectname": "wxml-to-canvas-render-test",
   "debugOptions": {
     "hidedInDevtools": []
@@ -49,11 +49,9 @@
   "simulatorPluginLibVersion": {},
   "condition": {
     "search": {
-      "current": -1,
       "list": []
     },
     "conversation": {
-      "current": -1,
       "list": []
     },
     "plugin": {
@@ -66,7 +64,6 @@
       "list": []
     },
     "miniprogram": {
-      "current": 2,
       "list": [
         {
           "id": 0,

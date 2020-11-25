@@ -1,5 +1,3 @@
-const {el, WTCUtils, covertElToMetadata} = require('../../components/wxml-to-canvas/wtc');
-
 Page({
   data: {
     src: '',
